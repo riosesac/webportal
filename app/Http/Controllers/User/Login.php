@@ -66,6 +66,12 @@ class Login extends Controller
                 # code...
                 return redirect()->back()->with('pesan_error', 'tidak dapat login');
             }
+            if ($u->role == 'developer') {
+                return redirect('/admin/develop/home')->with('pesan_sukses', 'Welcome ' . $u->username);
+            }
+            if ($u->role == 'admin') {
+                return redirect('/admin/admin/home')->with('pesan_sukses', 'Welcome ' . $u->username);
+            }
             return redirect('/admin/user/home')->with('pesan_sukses', 'Welcome ' . $u->username);
         } catch (\Throwable $th) {
             //throw $th;
